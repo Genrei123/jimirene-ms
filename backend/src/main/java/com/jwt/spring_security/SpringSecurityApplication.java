@@ -10,12 +10,4 @@ public class SpringSecurityApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringSecurityApplication.class, args);
 	}
-
-	@GetMapping("/")
-	public String home() {
-		return "home";
-	}
-
-	// Test command to check
-
 }

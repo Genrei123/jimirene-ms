@@ -157,47 +157,47 @@ const Patient: React.FC = () => {
     fetchPatientData();
   }, [id]);
 
-  const handleImageUpload = useCallback(
-    async (e: React.ChangeEvent<HTMLInputElement>) => {
-      const file = e.target.files?.[0];
-      if (!file) return;
+  // const handleImageUpload = useCallback(
+  //   async (e: React.ChangeEvent<HTMLInputElement>) => {
+  //     const file = e.target.files?.[0];
+  //     if (!file) return;
 
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const result = event.target?.result as string;
-        setPatientImage(result);
-      };
-      reader.readAsDataURL(file);
+  //     const reader = new FileReader();
+  //     reader.onload = (event) => {
+  //       const result = event.target?.result as string;
+  //       setPatientImage(result);
+  //     };
+  //     reader.readAsDataURL(file);
 
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("patientId", String(patientInfo.clientID));
+  //     const formData = new FormData();
+  //     formData.append("file", file);
+  //     formData.append("patientId", String(patientInfo.clientID));
 
-      try {
-        const response = await axiosInstance.post(
-          "/uploadPatientImage",
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
+  //     try {
+  //       const response = await axiosInstance.post(
+  //         "/uploadPatientImage",
+  //         formData,
+  //         {
+  //           headers: {
+  //             "Content-Type": "multipart/form-data",
+  //           },
+  //         }
+  //       );
 
-        if (response.status === 200) {
-          console.log("Image uploaded successfully:", response.data);
-          if (response.data.imagePath) {
-            setPatientImage(response.data.imagePath);
-          }
-        } else {
-          console.error("Upload failed with status:", response.status);
-        }
-      } catch (error) {
-        console.error("Error uploading image:", error);
-      }
-    },
-    [patientInfo]
-  );
+  //       if (response.status === 200) {
+  //         console.log("Image uploaded successfully:", response.data);
+  //         if (response.data.imagePath) {
+  //           setPatientImage(response.data.imagePath);
+  //         }
+  //       } else {
+  //         console.error("Upload failed with status:", response.status);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error uploading image:", error);
+  //     }
+  //   },
+  //   [patientInfo]
+  // );
 
   const handleOtherFilesInputChange = useCallback(
     async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -283,20 +283,7 @@ const Patient: React.FC = () => {
                         <Camera className="w-16 h-16 text-gray-400" />
                       )}
                     </div>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      id="patient-image-upload"
-                      className="hidden"
-                      onChange={handleImageUpload}
-                    />
-                    <label
-                      htmlFor="patient-image-upload"
-                      className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 cursor-pointer"
-                    >
-                      <Upload className="w-8 h-8 mr-2" />
-                      Upload Image
-                    </label>
+                    
                   </div>
 
                   <div className="bg-gray-50 p-4 rounded-lg shadow">

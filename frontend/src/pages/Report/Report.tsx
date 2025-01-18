@@ -2,14 +2,11 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 import Sidebar from "../../components/Sidebar";
 import axiosInstance from "../../config/axiosConfig";
-
-// Interface for Service
-interface Service {
-  serviceID: number;
-  service_name: string;
-  service_description: string;
-  service_price: number;
-}
+import { Service } from "../../types/Service";
+import { Branch } from "../../types/Branch";
+import { RenderedService } from "../../types/RenderedService";
+import { RenderedServiceDetail } from "../../types/RenderedServiceDetail";
+import { ChartData } from "../../types/ChartData";
 
 // Interface for Item (Medicine)
 interface Item {
@@ -24,41 +21,10 @@ interface Item {
   exp_date: string;
 }
 
-interface Branch {
-  branchID: number;
-  branch_name: string;
-  branch_address: string;
-  branch_contact: string;
-}
-
-// Interface for Rendered Service by Patient
-interface RenderedService {
-  id: number;
-  patientId: number;
-  services: RenderedServiceDetail[];
-  items: Item[];
-  totalCost: number;
-  notes: string;
-}
-
-interface RenderedServiceDetail {
-  serviceID: number;
-  serviceName: string;
-  serviceDescription: string;
-  servicePrice: number;
-}
-
-// Interface for Chart Data
-interface ChartData {
-  name: string;
-  value: number;
-}
-
 const Report: React.FC = () => {
   const [serviceData, setServiceData] = useState<ChartData[]>([]);
   const [medicineData, setMedicineData] = useState<ChartData[]>([]);
   const [stockData, setStockData] = useState<ChartData[]>([]);
-
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
 
@@ -67,21 +33,16 @@ const Report: React.FC = () => {
       try {
         const [servicesResponse, renderedServicesResponse, itemsResponse] =
           await Promise.all([
-            axiosInstance.get<Service[]>(
-              "http://localhost:8080/service/getServices"
-            ),
-            axiosInstance.get<RenderedService[]>(
-              "http://localhost:8080/service/getRenderedServices"
-            ),
-            axiosInstance.get<Item[]>("http://localhost:8080/items"),
+            axiosInstance.get<Service[]>("/service/getServices"),
+            axiosInstance.get<RenderedService[]>("/service/getRenderedServices"),
+            axiosInstance.get<Item[]>("/items"),
           ]);
-
-        // (Optional) If you need to store or process services separately
+    
         setServices(servicesResponse.data);
         aggregateData(renderedServicesResponse.data, itemsResponse.data);
       } catch (err: any) {
         console.error("Error fetching data:", err);
-        setError("Failed to fetch data.");
+
       } finally {
         setLoading(false);
       }
@@ -90,12 +51,6 @@ const Report: React.FC = () => {
     fetchData();
   }, []);
 
-  /**
-   * Aggregates:
-   *  - serviceCountMap: how many times each service was rendered
-   *  - medicineCountMap: how many of each medicine were sold (calculated by item_quantity - item_stock)
-   *  - stockMap: current stock of each medicine
-   */
   const aggregateData = (
     renderedServices: RenderedService[],
     items: Item[]

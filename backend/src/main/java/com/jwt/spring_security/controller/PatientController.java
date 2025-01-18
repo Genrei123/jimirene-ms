@@ -43,80 +43,80 @@ public class PatientController {
     @Autowired
     private RenderedServiceRepository renderedServiceRepository;
 
-    @PostMapping("/uploadPatientImage")
-    public ResponseEntity<?> uploadPatientImage(@RequestParam("file") MultipartFile file,
-                                                @RequestParam("patientId") Long patientId) {
-        try {
-            // Check if patient exists
-            Patient patient = patientRepo.findById(patientId)
-                    .orElseThrow(() -> new RuntimeException("Patient not found with ID: " + patientId));
-
-            if (file.isEmpty()) {
-                return ResponseEntity.badRequest().body("No file was uploaded.");
-            }
-
-            // Upload the file to Imgur
-            String imageUrl = uploadImageToImgur(file);
-            if (imageUrl == null) {
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload to Imgur.");
-            }
-
-            // Save the returned image URL in the patient record
-            patient.setImagePath(imageUrl);
-            patientRepo.save(patient);
-
-            Map<String, Object> response = new HashMap<>();
-            response.put("message", "Image uploaded successfully");
-            response.put("imagePath", imageUrl);
-
-            return ResponseEntity.ok(response);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Failed to upload image: " + e.getMessage());
-        }
-    }
-
-    private String uploadImageToImgur(MultipartFile file) {
-        try {
-            RestTemplate restTemplate = new RestTemplate();
-
-            // Set headers
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.MULTIPART_FORM_DATA);
-            headers.set("Authorization", "Client-ID " + imgurClientId);
-
-            // Build the body
-            MultiValueMap<String, Object> body = new org.springframework.util.LinkedMultiValueMap<>();
-            body.add("image", new org.springframework.core.io.ByteArrayResource(file.getBytes()) {
-                @Override
-                public String getFilename() {
-                    return file.getOriginalFilename();
-                }
-            });
-
-            HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
-
-            // Imgur Upload Endpoint
-            ResponseEntity<Map> response = restTemplate.exchange(
-                    "https://api.imgur.com/3/image",
-                    HttpMethod.POST,
-                    requestEntity,
-                    Map.class
-            );
-
-            if (response.getStatusCode() == HttpStatus.OK && response.getBody() != null) {
-                Map<String, Object> data = (Map<String, Object>) response.getBody().get("data");
-                if (data != null && data.get("link") != null) {
-                    return data.get("link").toString();
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+//    @PostMapping("/uploadPatientImage")
+//    public ResponseEntity<?> uploadPatientImage(@RequestParam("file") MultipartFile file,
+//                                                @RequestParam("patientId") Long patientId) {
+//        try {
+//            // Check if patient exists
+//            Patient patient = patientRepo.findById(patientId)
+//                    .orElseThrow(() -> new RuntimeException("Patient not found with ID: " + patientId));
+//
+//            if (file.isEmpty()) {
+//                return ResponseEntity.badRequest().body("No file was uploaded.");
+//            }
+//
+//            // Upload the file to Imgur
+//            String imageUrl = uploadImageToImgur(file);
+//            if (imageUrl == null) {
+//                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload to Imgur.");
+//            }
+//
+//            // Save the returned image URL in the patient record
+//            patient.setImagePath(imageUrl);
+//            patientRepo.save(patient);
+//
+//            Map<String, Object> response = new HashMap<>();
+//            response.put("message", "Image uploaded successfully");
+//            response.put("imagePath", imageUrl);
+//
+//            return ResponseEntity.ok(response);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+//                    .body("Failed to upload image: " + e.getMessage());
+//        }
+//    }
+//
+//    private String uploadImageToImgur(MultipartFile file) {
+//        try {
+//            RestTemplate restTemplate = new RestTemplate();
+//
+//            // Set headers
+//            HttpHeaders headers = new HttpHeaders();
+//            headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+//            headers.set("Authorization", "Client-ID " + imgurClientId);
+//
+//            // Build the body
+//            MultiValueMap<String, Object> body = new org.springframework.util.LinkedMultiValueMap<>();
+//            body.add("image", new org.springframework.core.io.ByteArrayResource(file.getBytes()) {
+//                @Override
+//                public String getFilename() {
+//                    return file.getOriginalFilename();
+//                }
+//            });
+//
+//            HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
+//
+//            // Imgur Upload Endpoint
+//            ResponseEntity<Map> response = restTemplate.exchange(
+//                    "https://api.imgur.com/3/image",
+//                    HttpMethod.POST,
+//                    requestEntity,
+//                    Map.class
+//            );
+//
+//            if (response.getStatusCode() == HttpStatus.OK && response.getBody() != null) {
+//                Map<String, Object> data = (Map<String, Object>) response.getBody().get("data");
+//                if (data != null && data.get("link") != null) {
+//                    return data.get("link").toString();
+//                }
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
 
     @PostMapping("/addPatient")
     public ResponseEntity<Patient> addPatient(@RequestBody PatientDTO patientDTO) {

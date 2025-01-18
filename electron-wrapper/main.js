@@ -3,12 +3,9 @@ const path = require('path');
 const { spawn } = require('child_process');
 
 let icon = path.join(__dirname, 'logo.png');
-
 let backendProcess;
 
 function createWindow() {
-  // Logo for the app
-  
   // Create the browser window
   const mainWindow = new BrowserWindow({
     icon: icon,
@@ -23,35 +20,62 @@ function createWindow() {
   // Load the built index.html
   mainWindow.loadFile(path.resolve(__dirname, '../frontend/dist/index.html'));
 
-  // Open DevTools for debugging
-  // mainWindow.webContents.openDevTools();
-
-  // Kill the backend process when the Electron app is closed
+  // Handle window close events
   mainWindow.on('closed', () => {
-    if (backendProcess) {
-      backendProcess.kill();
-    }
+    mainWindow = null; // Clean up the reference
   });
 }
 
-app.whenReady().then(() => {
-  // Start the backend JAR
-  const jarPath = path.join(__dirname, '../backend/dist/backend-0.0.1-SNAPSHOT.jar');
-  backendProcess = spawn('java', ['-jar', jarPath], { stdio: 'inherit' });
+function startBackend() {
+  // Get the path to the JAR file, accounting for both development and production
+  const jarPath = app.isPackaged
+    ? path.join(process.resourcesPath, 'backend', 'backend-0.0.1-SNAPSHOT.jar')
+    : path.join(__dirname, 'resources', 'backend', 'backend-0.0.1-SNAPSHOT.jar');
+
+  console.log('Backend JAR Path:', jarPath);
+
+  // Start the backend JAR process in hidden mode
+  backendProcess = spawn('java', ['-jar', jarPath], {
+    stdio: 'ignore', // Suppress stdout and stderr
+    detached: true,  // Allow the process to run independently
+  });
+
+  // Ensure the backend process doesn't prevent the app from quitting
+  backendProcess.unref();
 
   backendProcess.on('error', (err) => {
-    console.error('Failed to start backend process:', err);
+    console.error('Failed to start backend process:', err.message);
   });
 
   backendProcess.on('exit', (code, signal) => {
     console.log(`Backend process exited with code ${code}, signal ${signal}`);
   });
+}
 
+function stopBackend() {
+  if (backendProcess) {
+    backendProcess.kill(); // Kill the backend process
+    backendProcess = null; // Clean up the reference
+  }
+}
+
+app.whenReady().then(() => {
+  startBackend();
   createWindow();
+
+  app.on('activate', () => {
+    if (BrowserWindow.getAllWindows().length === 0) {
+      createWindow();
+    }
+  });
 });
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();
   }
+});
+
+app.on('quit', () => {
+  stopBackend(); // Ensure backend is stopped when the app quits
 });

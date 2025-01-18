@@ -1,0 +1,54 @@
+.image-section img {
+    height: 12rem;
+    width: 12rem;
+    object-fit: cover;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .image-section .bg-gray-200 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 12rem;
+    width: 12rem;
+    border-radius: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .patient-details p {
+    text-align: center;
+    margin: 0.5rem 0;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+  }
+  
+  th, td {
+    padding: 1rem;
+    text-align: left;
+    border: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #f9f9f9;
+    font-weight: bold;
+  }
+  
+  tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  button {
+    transition: background-color 0.3s ease;
+}
+
+  button:hover {
+    background-color: #2563eb;
+  }
+  
+  
+  

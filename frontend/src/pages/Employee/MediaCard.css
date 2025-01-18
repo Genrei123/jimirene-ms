@@ -1,0 +1,58 @@
+/* MediaCard.css */
+.card-container {
+  display: flex;
+  justify-content: flex-start;  /* Align the card to the left */
+  align-items: center;          /* Center the card vertically */
+  height: 100vh;                /* Full height of the viewport */
+  padding-left: -800px;           /* Optional: Add some space from the left edge */
+}
+
+.media-card {
+  width: 500px;  /* Set a width for the card */
+  margin-top: 20px; /* Optional: Space the card from the top */
+}
+
+.media-card-media {
+  height: 200px;  /* Set the height of the image */
+}
+
+.media-card-actions {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.media-card-button {
+  background-color: #cc0a92 !important;
+  color: white !important;
+  padding: 8px 16px !important;
+  font-size: 14px !important;
+  border-radius: 4px !important;
+  transition: background-color 0.3s ease !important;
+}
+
+.media-card-button:hover {
+  background-color: #ac1e73 !important;
+  cursor: pointer !important;
+}
+
+.employee-heading {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.employee-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.employee-table th, .employee-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+.employee-table th {
+  background-color: #f2f2f2;
+}

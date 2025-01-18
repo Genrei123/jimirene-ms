@@ -1,0 +1,114 @@
+/* Apply styles only to elements inside the login-page class */
+.login-page {
+    display: grid;
+    grid-template-columns: 100% 30%; /* 70% left, 30% right */
+    height: 100vh; /* Full viewport height */
+}
+
+/* Left Section Styling - 70% Width */
+.login-page .left-section {
+    background-color: #2DA4AF !important; /* Set color for left section */
+    opacity: 0.8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Right Section Styling - Ensure the parent allows more width */
+/* Right Section Adjustments */
+.login-page .right-section {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align items at the top */
+    align-items: center; /* Center the content horizontally */
+    padding: 2rem;
+    height: 100vh;
+    width: 100%;
+}
+
+
+/* Style the logo */
+.login-logo {
+    width: 70px; /* Set a fixed width for the logo */
+    height: auto; /* Maintain the aspect ratio */
+    margin-top: -40px !important; /* Move the logo upwards */
+    margin-left: 0px; /* Adjust or remove margin */
+    margin-bottom: 30px; /* Space below the logo */
+}
+
+.login-title {
+    margin-top: 50px; /* Set the top margin to 0 to remove any space above */
+    text-align: center; /* Center the title text */
+    padding-top: 0px; /* Remove any extra padding if present */
+}
+
+
+/* Form Section Styling */
+.login-page form {
+    width: 100%;
+    max-width: 1000px; /* Make the form wider to accommodate the input */
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Input Fields Styling */
+.login-page input {
+    height: 50px;
+    width: 100%; /* The input will take up the full width of the form container */
+    padding: 0.8rem;
+    box-sizing: border-box;
+}
+
+/* Button Styling */
+.login-page button {
+    background-color: #3498db;
+    color: white;
+    padding: 1rem;
+    width: 100%;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.login-page button:hover {
+    background-color: #2980b9;
+}
+
+/* Style for the heading */
+.login-heading {
+    font-size: 1.5rem;  /* Set the font size slightly smaller */
+    position: relative;  /* Make it positionable */
+    top: -10px;  /* Move the text upwards by 10px (adjust as needed) */
+    font-weight: bold;  /* Keep the font weight bold */
+    color: #1F2937;  /* Adjust color to gray-900 */
+}
+
+/* Input field styles */
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc; /* Default border color */
+  border-radius: 5px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  outline: none; /* Remove default blue outline */
+}
+
+/* Override Material UI's focus outline */
+.MuiOutlinedInput-root.Mui-focused {
+  border-color: #2DA4AF !important; /* Green border */
+}
+
+/* Button hover effect */
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* Error messages */
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}

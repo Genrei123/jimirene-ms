@@ -1,0 +1,10 @@
+/* LandingPage.css */
+.slick-slider {
+    overflow: hidden;
+  }
+  .slick-slide > div {
+    display: flex !important; /* ensures full height slides */
+    align-items: center;
+    justify-content: center;
+  }
+  

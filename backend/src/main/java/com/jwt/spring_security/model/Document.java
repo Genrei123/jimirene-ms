@@ -7,7 +7,6 @@ import jakarta.persistence.ManyToOne;
 
 import java.util.Date;
 
-@Entity
 public abstract class Document {
     @Id
     private Long documentID;
@@ -16,6 +15,7 @@ public abstract class Document {
     @JoinColumn(name = "clientID")
     private Patient patientID;
 
+    private String formType; // Common field for form type
     private Date createdAt;
     private Date updatedAt;
 
@@ -33,6 +33,14 @@ public abstract class Document {
 
     public void setPatientID(Patient patientID) {
         this.patientID = patientID;
+    }
+
+    public String getFormType() {
+        return formType;
+    }
+
+    public void setFormType(String formType) {
+        this.formType = formType;
     }
 
     public Date getCreatedAt() {

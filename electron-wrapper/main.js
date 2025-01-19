@@ -54,7 +54,11 @@ function startBackend() {
 
 function stopBackend() {
   if (backendProcess) {
-    backendProcess.kill(); // Kill the backend process
+    try {
+      backendProcess.kill(); // Kill the backend process
+    } catch (err) {
+      console.error('Error while stopping the backend:', err.message);
+    }
     backendProcess = null; // Clean up the reference
   }
 }
@@ -72,7 +76,7 @@ app.whenReady().then(() => {
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
-    app.quit();
+    app.quit(); // Quit the app
   }
 });
 

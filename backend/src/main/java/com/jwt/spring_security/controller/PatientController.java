@@ -34,12 +34,6 @@ public class PatientController {
     @Autowired
     private PatientService patientService;
 
-    @Value("${file.upload.dir:uploads/patient_images}")
-    private String uploadDir;
-
-    @Value("${imgur.client_id}")
-    private String imgurClientId;
-
     @Autowired
     private RenderedServiceRepository renderedServiceRepository;
 

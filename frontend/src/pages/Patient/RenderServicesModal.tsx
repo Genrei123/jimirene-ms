@@ -191,6 +191,8 @@ const RenderServicesModal: React.FC<RenderServicesModalProps> = ({
       console.error("Error submitting data:", error);
       alert("An error occurred while submitting the data.");
     }
+
+    window.location.reload();
   };
   
 

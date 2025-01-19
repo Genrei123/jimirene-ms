@@ -180,6 +180,8 @@ const PatientProfileModal: React.FC<PatientProfileModalProps> = ({
       setIsModalOpen(false);
       setFormData(createEmptyPatient()); // Reset form data after submission
     }
+
+    window.location.reload();
   };
 
   const steps = [

@@ -8,7 +8,7 @@
   },
   "build": {
     "appId": "com.example.myelectronapp",
-    "productName": "MyElectronApp",
+    "productName": "JIMIRENE",
     "directories": {
       "output": "dist"
     },

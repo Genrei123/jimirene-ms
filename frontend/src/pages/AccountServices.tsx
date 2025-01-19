@@ -135,6 +135,10 @@ export default function AccountServices() {
     });
     setIsEditing(false);
     setIsModalOpen(false);
+
+    // Refresh page
+    window.location.reload();
+
   };
 
   // Handle editing a service

@@ -2,6 +2,7 @@ package com.jwt.spring_security.controller;
 import com.jwt.spring_security.exception.model.ApiErrorResponse;
 import com.jwt.spring_security.model.Branch;
 import com.jwt.spring_security.service.BranchService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -27,8 +28,7 @@ public class BranchController {
 
     @GetMapping("/branches")
     public ResponseEntity<List<Branch>> getAllBranches() {
-        List<Branch> branches = branchRepo.findAll();
-        return ResponseEntity.ok(branches);
+        return branchService.getAllActiveBranches();
     }
 
     @GetMapping("/readBranch/{id}")
@@ -52,14 +52,15 @@ public class BranchController {
         return ResponseEntity.ok(branchRepo.save(branchDetails));
     }
 
-    @DeleteMapping("/deleteBranch/{id}")
-    public ResponseEntity<?> deleteBranch(@PathVariable Long id) {
-        boolean isRemoved = branchService.deleteByBranchID(id);
-        if (!isRemoved) {
+    @PutMapping("/deleteBranch/{id}")
+    public ResponseEntity<?> softDeleteBranch(@PathVariable Long id) {
+        Branch branch = branchRepo.findByBranchID(id);
+        if (branch == null) {
             return ResponseEntity.status(404)
                     .body(new ApiErrorResponse("Not Found", "Branch with ID " + id + " not found", id));
         }
-        return ResponseEntity.noContent().build();
+        branch.setDeleted(true);
+        return ResponseEntity.ok(branchRepo.save(branch));
     }
 }
 

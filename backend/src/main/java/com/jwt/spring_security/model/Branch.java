@@ -23,6 +23,9 @@ public class Branch {
     @JsonProperty("branch_contact") // This ensures proper mapping for snake_case in the request
     private String branchContact;
 
+    @Column(nullable = false)
+    private boolean deleted = false;
+
     public Long getBranchID() {
         return branchID;
     }
@@ -55,4 +58,11 @@ public class Branch {
         this.branchContact = branchContact;
     }
 
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
 }

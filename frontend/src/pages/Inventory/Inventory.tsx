@@ -180,9 +180,7 @@ const Inventory: React.FC = () => {
       }
   
       // Step 2: Proceed with the delete request
-      await axiosInstance.delete('/deleteItems', {
-        data: selectedItems, // Pass selected items as the request body
-      });
+      await axiosInstance.put('/deleteItems', selectedItems); // Pass selected items as the request body);
   
       // Step 3: Update the frontend state after successful deletion
       setItems((prev) => prev.filter((item) => !selectedItems.includes(item.itemID)));
@@ -446,9 +444,10 @@ const Inventory: React.FC = () => {
       alert('Failed to add items. Please try again.');
     }
   };
-  
 
-
+  const handleRemoveItem = (index) => {
+    setNewItems((prevItems) => prevItems.filter((_, i) => i !== index));
+  };
 
   return (
     <div className="flex h-screen bg-gray-100">
@@ -556,7 +555,7 @@ const Inventory: React.FC = () => {
       </div>
 
       {/* Add Item Modal */}
-      <Modal
+<Modal
   open={isAddModalOpen}
   onClose={handleAddModalClose}
   aria-labelledby="add-item-modal"
@@ -566,7 +565,7 @@ const Inventory: React.FC = () => {
     <h2 className="text-2xl font-bold mb-4">Add New Items</h2>
     <div className="overflow-y-auto max-h-[60vh]">
       {newItems.map((item, index) => (
-        <div key={index}>
+        <div key={index} className="relative border-b pb-4 mb-4">
           <h3 className="text-xl font-semibold mb-4">Item {index + 1}</h3>
           <label className="block mb-2 font-semibold">Name:</label>
           <input
@@ -587,7 +586,8 @@ const Inventory: React.FC = () => {
             type="number"
             value={item.item_stock}
             onChange={(e) => handleAddItemChange(index, "item_stock", Number(e.target.value))}
-            className="border border-gray-300 p-2 w-full rounded-md shadow-sm mb-4"/>
+            className="border border-gray-300 p-2 w-full rounded-md shadow-sm mb-4"
+          />
           <label className="block mb-2 font-semibold">Price:</label>
           <input
             type="number"
@@ -609,7 +609,7 @@ const Inventory: React.FC = () => {
             onChange={(e) => handleAddItemChange(index, "exp_date", e.target.value)}
             className="border border-gray-300 p-2 w-full rounded-md shadow-sm mb-4"
           />
-          
+
           {/* Conditional rendering for branch input */}
           {index === 0 && (
             <>
@@ -628,6 +628,14 @@ const Inventory: React.FC = () => {
               </select>
             </>
           )}
+
+          {/* Remove Button */}
+          <button
+            onClick={() => handleRemoveItem(index)}
+            className="absolute top-0 right-0 bg-red-500 text-white px-4 py-1 rounded-md hover:bg-red-600"
+          >
+            Remove
+          </button>
         </div>
       ))}
     </div>
@@ -647,6 +655,7 @@ const Inventory: React.FC = () => {
     </div>
   </Box>
 </Modal>
+
 
         
 {/* Edit Item Modal */}

@@ -27,6 +27,9 @@ public class Pregnancy {
     private Date IT_date;
     private Date menarche;
 
+    @Column(nullable = false)
+    private boolean deleted = false;
+
     public Long getPregnancy_id() {
         return pregnancy_id;
     }

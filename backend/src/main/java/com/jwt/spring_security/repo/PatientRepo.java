@@ -15,4 +15,5 @@ public interface PatientRepo extends JpaRepository<Patient, Long> {
     List<Patient> findActivePatients();
     List<Patient> findByGivenNameAndStatus(String givenName, String status);
     Optional<Patient> findByPatientID(String patientID);
+    List<Patient> findByDeletedFalse();
 }

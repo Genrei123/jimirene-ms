@@ -26,6 +26,9 @@ public class MedicalHistory {
     private boolean forcep_delivery;
     private boolean hypertension;
 
+    @Column(nullable = false)
+    private boolean deleted = false;
+
 
 
     public Long getMedical_history_id() {

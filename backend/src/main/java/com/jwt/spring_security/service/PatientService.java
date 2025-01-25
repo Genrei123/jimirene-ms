@@ -119,4 +119,12 @@ public class PatientService {
         // Return the clientID of the saved patient
         return savedPatient.getClientID();
     }
+
+    public void softDeletePatient(Long patientId) {
+        Patient patient = patientRepo.findById(patientId).orElse(null);
+        if (patient != null) {
+            patient.setDeleted(true);
+            patientRepo.save(patient);
+        }
+    }
 }

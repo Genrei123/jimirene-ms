@@ -24,6 +24,9 @@ public class Consultation {
     private Float FHT;    // Changed to Float
     private String remarks;
 
+    @Column(nullable = false)
+    private boolean deleted = false;
+
     public Long getConsultation_id() {
         return consultation_id;
     }

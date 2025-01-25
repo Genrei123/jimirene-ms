@@ -22,6 +22,9 @@ public class Spouse {
     private String spouse_contact_number;
     private int spouse_age;
 
+    @Column(nullable = false)
+    private boolean deleted = false;
+
     // Getter for spouse_id
     public Long getSpouse_id() {
         return spouse_id;

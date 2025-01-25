@@ -3,9 +3,9 @@ import axiosInstance from '../config/axiosConfig';
 import Sidebar from '../components/Sidebar';
 
 export default function AccountBranches() {
-  const [branches, setBranches] = useState<{ id: string; branch_name: string; branch_address: string; branch_contact: string }[]>([]);
+  const [branches, setBranches] = useState<{ branchID: number; branch_name: string; branch_address: string; branch_contact: string }[]>([]);
   const [branchData, setBranchData] = useState({
-    id: '',
+    branchID: 0,
     branch_name: '',
     branch_address: '',
     branch_contact: '',
@@ -22,7 +22,9 @@ export default function AccountBranches() {
   const fetchBranches = async () => {
     try {
       const response = await axiosInstance.get('/branches');
+      console.log(response.data);
       setBranches(response.data);
+
     } catch (error) {
       console.error('Error fetching branches:', error);
       setMessage('Failed to fetch branches.');
@@ -41,7 +43,7 @@ export default function AccountBranches() {
     try {
       if (isEditing) {
         // Update branch
-        await axiosInstance.put(`/updateBranch/${branchData.id}`, branchData);
+        await axiosInstance.put(`/updateBranch/${branchData.branchID}`, branchData);
         setMessage('Branch updated successfully!');
       } else {
         // Add new branch
@@ -65,8 +67,8 @@ export default function AccountBranches() {
 
   const handleDelete = async (id) => {
     try {
-      await axiosInstance.delete(`/deleteBranch/${id}`);
-      setBranches((prev) => prev.filter((branch) => branch.id !== id));
+      await axiosInstance.put(`/deleteBranch/${id}`);
+      setBranches((prev) => prev.filter((branch) => branch.branchID !== id));
       setMessage('Branch deleted successfully!');
     } catch (error) {
       console.error('Error deleting branch:', error);
@@ -76,7 +78,7 @@ export default function AccountBranches() {
 
   const resetForm = () => {
     setBranchData({
-      id: '',
+      branchID: 0,
       branch_name: '',
       branch_address: '',
       branch_contact: '',
@@ -116,7 +118,7 @@ export default function AccountBranches() {
           {branches.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {branches.map((branch) => (
-                <div key={branch.id} className="bg-white shadow-md rounded-lg p-6">
+                <div key={branch.branchID} className="bg-white shadow-md rounded-lg p-6">
                   <h3 className="text-xl font-semibold mb-2 text-gray-800">{branch.branch_name}</h3>
                   <p className="text-gray-600 mb-2">{branch.branch_address}</p>
                   <p className="text-gray-600 mb-4">{branch.branch_contact}</p>
@@ -128,7 +130,7 @@ export default function AccountBranches() {
                       Edit
                     </button>
                     <button
-                      onClick={() => handleDelete(branch.id)}
+                      onClick={() => handleDelete(branch.branchID)}
                       className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
                     >
                       Delete

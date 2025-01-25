@@ -49,13 +49,21 @@ public class Patient {
     @Column(nullable = false)
     private String status = "active"; // Default status is active
 
+    @Column(nullable = false)
+    private boolean deleted = false;
+
     @ManyToOne
     @JoinColumn(name = "branchID", referencedColumnName = "branchID", unique = false)
-
-
     private Branch branch;
 
     // Getters and setters
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
 
     public String getContactNumber() {
         return contactNumber;

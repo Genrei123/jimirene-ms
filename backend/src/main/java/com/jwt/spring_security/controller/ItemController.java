@@ -27,8 +27,8 @@ public class ItemController {
     private com.jwt.spring_security.repo.branchRepo branchRepo;
 
     @GetMapping("/items")
-    public List<Item> getItems() {
-        return itemRepo.findAll();
+    public ResponseEntity<List<Item>> getItems() {
+        return itemService.getAllActiveItems();
     }
 
     @GetMapping("/items/{id}")
@@ -106,10 +106,16 @@ public class ItemController {
     }
 
 
-    @DeleteMapping("/deleteItems")
-    public ResponseEntity<?> deleteItems(@RequestBody List<Long> ids) {
-        itemService.deleteByItemIDs(ids);
-        return ResponseEntity.ok().body("Items deleted successfully");
+//    @DeleteMapping("/deleteItems")
+//    public ResponseEntity<?> deleteItems(@RequestBody List<Long> ids) {
+//        itemService.deleteByItemIDs(ids);
+//        return ResponseEntity.ok().body("Items deleted successfully");
+//    }
+
+    @PutMapping("/deleteItems")
+    public ResponseEntity<?> softDeleteItems(@RequestBody List<Long> ids) {
+        itemService.softDeleteByItemIDs(ids);
+        return ResponseEntity.ok().body("Items soft deleted successfully");
     }
 
     @PostMapping("/purchaseItems")

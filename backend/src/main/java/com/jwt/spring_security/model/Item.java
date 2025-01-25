@@ -41,6 +41,17 @@ public class Item {
     @JoinColumn(name = "branchID", referencedColumnName = "branchID")
     private Branch branch;
 
+    @Column(nullable = false)
+    private boolean deleted = false;
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+
     public Long getItemStock() {
         return itemStock;
     }

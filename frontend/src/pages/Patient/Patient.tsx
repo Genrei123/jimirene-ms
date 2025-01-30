@@ -8,6 +8,7 @@ import useModal from "../Home/useModal";
 import RenderServicesModal from "./RenderServicesModal";
 import PatientDetailsModal from "./PatientDetailsModal";
 import axiosInstance from "../../config/axiosConfig";
+import EditPatientForm from "./EditPatientForm";
 
 interface Visit {
   visitDate: string;
@@ -48,6 +49,7 @@ interface Patient {
 }
 
 const Patient: React.FC = () => {
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const { isModalOpen, openModal, closeModal } = useModal();
   const {
     isModalOpen: isPatientModalOpen,
@@ -156,48 +158,6 @@ const Patient: React.FC = () => {
 
     fetchPatientData();
   }, [id]);
-
-  // const handleImageUpload = useCallback(
-  //   async (e: React.ChangeEvent<HTMLInputElement>) => {
-  //     const file = e.target.files?.[0];
-  //     if (!file) return;
-
-  //     const reader = new FileReader();
-  //     reader.onload = (event) => {
-  //       const result = event.target?.result as string;
-  //       setPatientImage(result);
-  //     };
-  //     reader.readAsDataURL(file);
-
-  //     const formData = new FormData();
-  //     formData.append("file", file);
-  //     formData.append("patientId", String(patientInfo.clientID));
-
-  //     try {
-  //       const response = await axiosInstance.post(
-  //         "/uploadPatientImage",
-  //         formData,
-  //         {
-  //           headers: {
-  //             "Content-Type": "multipart/form-data",
-  //           },
-  //         }
-  //       );
-
-  //       if (response.status === 200) {
-  //         console.log("Image uploaded successfully:", response.data);
-  //         if (response.data.imagePath) {
-  //           setPatientImage(response.data.imagePath);
-  //         }
-  //       } else {
-  //         console.error("Upload failed with status:", response.status);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error uploading image:", error);
-  //     }
-  //   },
-  //   [patientInfo]
-  // );
 
   const handleOtherFilesInputChange = useCallback(
     async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -382,6 +342,23 @@ const Patient: React.FC = () => {
                         <UserCheck className="w-5 h-5 mr-2" />
                         Patient Details
                       </button>
+
+                      <button
+                        onClick={() => setIsEditModalOpen(true)}
+                        className="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-md transition duration-200 ease-in-out flex items-center justify-center"
+                      >
+                        <UserCheck className="w-5 h-5 mr-2" />
+                        Edit Patient
+                      </button>
+
+                      <EditPatientForm
+  patientId={patientInfo?.clientID}
+  isOpen={isEditModalOpen}
+  onClose={() => setIsEditModalOpen(false)}
+  onSuccess={() => {
+    // Refresh your patient list or handle successful update
+  }}
+/>
                     </div>
                   </div>
                 </div>

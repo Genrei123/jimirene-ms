@@ -40,8 +40,9 @@ const GeneratePDF: React.FC = () => {
       const response = await axiosInstance.get("/getPatient", {
         params: { patientId },
       });
+      console.log("Patient data:", response.data);
       if (response.data && response.data.length > 0) {
-        return response.data[0] as Patient;
+        return response.data[Number(patientId) - 1] as Patient;
       } else {
         throw new Error("No patient data found.");
       }
@@ -205,6 +206,7 @@ const GeneratePDF: React.FC = () => {
             <div className="bg-white shadow-lg rounded-lg overflow-hidden">
               <div className="p-6 bg-gradient-to-r from-blue-500 to-blue-600 text-white flex items-center">
                 <Link
+                  onClick={() => setPatientData(null)}
                   to={`/patient/${patientId}`}
                   className="mr-4 p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-colors duration-200 flex items-center"
                   aria-label="Go back to Patient Records"

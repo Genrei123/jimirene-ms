@@ -31,7 +31,7 @@ export default interface Patient {
     living: number;
     LMP: string;
     edc: string;
-    IT_date: string;
+    TT_date: string;
     menarche: string;
   };
 

@@ -68,7 +68,7 @@ public class PatientService {
             pregnancy.setLiving(pregnancyDTO.getLiving());
             pregnancy.setLMP(pregnancyDTO.getLMP());
             pregnancy.setEDC(pregnancyDTO.getEDC());
-            pregnancy.setIT_date(pregnancyDTO.getITDate());
+            pregnancy.setTT_date(pregnancyDTO.getTTDate());
             pregnancy.setMenarche(pregnancyDTO.getMenarche());
             pregnancy.setPatient(patient);
             patient.setPregnancy(pregnancy);

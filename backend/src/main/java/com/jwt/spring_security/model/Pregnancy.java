@@ -24,7 +24,7 @@ public class Pregnancy {
     private Integer living;
     private Date LMP;
     private Date EDC;
-    private Date IT_date;
+    private Date TT_date;
     private Date menarche;
 
     @Column(nullable = false)
@@ -110,12 +110,12 @@ public class Pregnancy {
         this.EDC = EDC;
     }
 
-    public Date getIT_date() {
-        return IT_date;
+    public Date getTT_date() {
+        return TT_date;
     }
 
-    public void setIT_date(Date IT_date) {
-        this.IT_date = IT_date;
+    public void setTT_date(Date TT_date) {
+        this.TT_date = TT_date;
     }
 
     public Date getMenarche() {

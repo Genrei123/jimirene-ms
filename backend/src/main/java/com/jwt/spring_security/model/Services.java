@@ -3,12 +3,16 @@ package com.jwt.spring_security.model;
 import jakarta.persistence.*;
 import org.antlr.v4.runtime.misc.NotNull;
 
+import java.util.Date;
+
 @Entity
 public class Services {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long serviceID;
 
+
+    private Date service_date;
     private String service_name;
     private String service_description;
 
@@ -16,6 +20,8 @@ public class Services {
     @ManyToOne
     @JoinColumn(name = "branchID", referencedColumnName = "branchID")
     private Branch branch;
+
+
 
     private double service_price;
 

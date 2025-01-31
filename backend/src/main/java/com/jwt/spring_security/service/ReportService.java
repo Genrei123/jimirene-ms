@@ -19,7 +19,6 @@ public class ReportService {
     public List<Map<String, Object>> getMonthlyCheckIns() {
         // Fetch aggregated data for patients and employees
         List<Object[]> patientResults = reportRepository.aggregatePatientCheckIns();
-        List<Object[]> employeeResults = reportRepository.aggregateEmployeeCheckIns();
 
         // Map for temporary aggregation
         Map<YearMonth, Map<String, Long>> aggregatedData = new HashMap<>();
@@ -33,17 +32,6 @@ public class ReportService {
             YearMonth yearMonth = YearMonth.of(year, month);
             aggregatedData.computeIfAbsent(yearMonth, k -> new HashMap<>())
                     .put("patientCheckIns", totalPatients);
-        }
-
-        // Process employee data
-        for (Object[] result : employeeResults) {
-            int year = (int) result[0];
-            int month = (int) result[1];
-            long totalEmployees = (long) result[2];
-
-            YearMonth yearMonth = YearMonth.of(year, month);
-            aggregatedData.computeIfAbsent(yearMonth, k -> new HashMap<>())
-                    .put("employeeCheckIns", totalEmployees);
         }
 
         // Convert to a list of maps for the response

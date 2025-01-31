@@ -32,6 +32,7 @@ const GeneratePDF: React.FC = () => {
       params.set("form", formType);
       return params;
     });
+    console.log("Form Type:", formType);
   }, [formType, setSearchParams]);
 
   // Function to fetch patient data
@@ -58,24 +59,42 @@ const GeneratePDF: React.FC = () => {
     const checkBoxFields: { [key: string]: any } = {};
 
     // Common Text Fields
-    if (formType === "CF1" || formType === "CSF") {
+    if (formType === "CF1") {
       textFields["MI_last_name"] = patient.lastName;
       textFields["MI_first_name"] = patient.givenName;
-      //textFields["MI_middle_name"] = patient.middleName;
-      // Split Birth Date
-      //patient.birthday = patient.birthday.split("T")[0];
-      // const birthDate = new Date(patient.birthday);
-      // const birthMonth = birthDate.getMonth() + 1;
-      textFields["MI_birth_date_month"] = 21;
-
+      textFields["MI_middle_name"] = patient.middleName;
+      textFields["EC_Contact_Number"] = "0" + patient.contactNumber;
+      textFields["Member_Date_of_Birth_1"] = "0";
+      textFields["Member_Date_of_Birth_2"] = "9";
+      textFields["Member_Date_of_Birth_3"] = "1";
+      textFields["Member_Date_of_Birth_4"] = "9";
+      textFields["Member_Date_of_Birth_5"] = "2";
+      textFields["Member_Date_of_Birth_6"] = "0";
+      textFields["Member_Date_of_Birth_7"] = "0";
+      textFields["Member_Date_of_Birth_8"] = "3";
     }
 
-    
-    textFields["MI_last_name"] = patient.lastName;
-    textFields["MI_first_name"] = patient.givenName;
-    textFields["EC_Contact_Number"] = "test";
-    
-  
+    else if (formType === "Claim Form 1") {
+      textFields["MI_last_name"] = patient.lastName;
+      textFields["MI_first_name"] = patient.givenName;
+      textFields["MI_middle_name"] = patient.middleName;
+      textFields["MI_mobile_no"] = "0" + patient.contactNumber;
+      textFields["Member_Date_of_Birth_1"] = "0";
+      textFields["Member_Date_of_Birth_2"] = "9";
+      textFields["Member_Date_of_Birth_3"] = "1";
+      textFields["Member_Date_of_Birth_4"] = "9";
+      textFields["Member_Date_of_Birth_5"] = "2";
+      textFields["Member_Date_of_Birth_6"] = "0";
+      textFields["Member_Date_of_Birth_7"] = "0";
+      textFields["Member_Date_of_Birth_8"] = "3";
+    }
+
+    else if (formType === "Claim Form 2") {
+      textFields["PI_last_name"] = patient.lastName;
+      textFields["PI_first_name"] = patient.givenName;
+      textFields["PI_middle_name"] = patient.middleName;
+    }
+
     return { textFields, checkBoxFields };
   };
 
@@ -104,6 +123,14 @@ const GeneratePDF: React.FC = () => {
       );
       const pdfDoc = await PDFDocument.load(pdfBytes);
       const form = pdfDoc.getForm();
+
+      // Log all text fields in the PDF
+    const fields = form.getFields();
+    fields.forEach((field) => {
+      
+      console.log(`Field Name: ${field.getName()}, Value: ${field.getName()}`);
+      
+    });
 
       const { textFields, checkBoxFields } = getFieldMappings(
         formType,

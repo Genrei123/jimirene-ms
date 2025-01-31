@@ -2,7 +2,14 @@ import React, { useEffect, useState, useCallback, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Sidebar from "../../components/Sidebar";
 import Navbar from "../../components/Navbar";
-import { Camera, Upload, FileText, UserCheck, Calendar, Phone } from "lucide-react";
+import {
+  Camera,
+  Upload,
+  FileText,
+  UserCheck,
+  Calendar,
+  Phone,
+} from "lucide-react";
 import { getPatientById } from "../../services/patientService";
 import useModal from "../Home/useModal";
 import RenderServicesModal from "./RenderServicesModal";
@@ -243,7 +250,6 @@ const Patient: React.FC = () => {
                         <Camera className="w-16 h-16 text-gray-400" />
                       )}
                     </div>
-                    
                   </div>
 
                   <div className="bg-gray-50 p-4 rounded-lg shadow">
@@ -265,7 +271,7 @@ const Patient: React.FC = () => {
                           {patient.expectedDateConfinement}
                         </p>
 
-                        <p className= "flex items-cecnter text-gray-700">
+                        <p className="flex items-cecnter text-gray-700">
                           <Phone className="w-5 h-5 mr-2 text-blue-500" />
                           <span className="font-semibold mr-2">
                             Contact Number:
@@ -352,13 +358,13 @@ const Patient: React.FC = () => {
                       </button>
 
                       <EditPatientForm
-  patientId={patientInfo?.clientID}
-  isOpen={isEditModalOpen}
-  onClose={() => setIsEditModalOpen(false)}
-  onSuccess={() => {
-    // Refresh your patient list or handle successful update
-  }}
-/>
+                        patientId={patientInfo?.clientID}
+                        isOpen={isEditModalOpen}
+                        onClose={() => setIsEditModalOpen(false)}
+                        onSuccess={() => {
+                          // Refresh your patient list or handle successful update
+                        }}
+                      />
                     </div>
                   </div>
                 </div>

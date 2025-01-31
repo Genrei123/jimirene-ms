@@ -57,7 +57,7 @@ const PatientDetailsModal: React.FC<PatientDetailsModalProps> = ({
     living: "Living Children",
     lmp: "Last Menstrual Period",
     edc: "Estimated Due Date",
-    it_date: "Initial Treatment Date",
+    tt_date: "Initial Treatment Date",
     menarche: "Age at First Menstruation",
     // Consultation keys
     consultation_id: "Medical History ID",
@@ -225,7 +225,7 @@ const PatientDetailsModal: React.FC<PatientDetailsModalProps> = ({
             <table className="w-full table-auto border-collapse">
               <tbody>
                 {Object.entries(formData)
-                  .filter(([key]) => key !== "imagePath" && key !== "clientID" && key !== "status" && key !== "middleInitial" && key !== "varcharID" && key !== "it_date")
+                  .filter(([key]) => key !== "imagePath" && key !== "clientID" && key !== "status" && key !== "middleInitial" && key !== "varcharID" && key !== "tt_date")
                   
                   .map(([key, value]) => (
                     

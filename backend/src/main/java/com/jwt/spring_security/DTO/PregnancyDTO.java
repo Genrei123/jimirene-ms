@@ -22,9 +22,9 @@ public class PregnancyDTO {
     @JsonProperty("EDC")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date EDC; // Nullable
-    @JsonProperty("IT_date")
+    @JsonProperty("TT_date")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private Date ITDate; // Maps to `IT_date`
+    private Date TTDate; // Maps to `IT_date`
     private Date menarche; // Nullable
 
     public Integer getGravida() {
@@ -91,12 +91,12 @@ public class PregnancyDTO {
         this.EDC = EDC;
     }
 
-    public Date getITDate() {
-        return ITDate;
+    public Date getTTDate() {
+        return TTDate;
     }
 
     public void setITDate(Date ITDate) {
-        this.ITDate = ITDate;
+        this.TTDate = ITDate;
     }
 
     public Date getMenarche() {

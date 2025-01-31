@@ -10,6 +10,7 @@ import type Patient from "../../types/Patient"
 import { createEmptyPatient } from "../../utils/Patient"
 import { getPatients } from "../../services/patientService"
 import { getServices } from "../../services/serviceService"
+import axiosInstance from "@/config/axiosConfig"
 
 const Home: React.FC = () => {
   const navigate = useNavigate()
@@ -44,6 +45,16 @@ const Home: React.FC = () => {
       return
     }
 
+    const fetchBranches = async () => {
+      const response = axiosInstance.get('/branches')
+      if ((await response).data.length === 0) {
+        navigate("/account/branch");
+      }
+      
+    }
+
+    
+
     const fetchPatients = async () => {
       try {
         const response = await getPatients()
@@ -71,8 +82,9 @@ const Home: React.FC = () => {
       }
     }
 
-    fetchPatients()
-    fetchServices()
+    fetchPatients();
+    fetchServices();
+    fetchBranches();
   }, [navigate])
 
   const toggleFullscreen = (table: "services" | "patients") => {

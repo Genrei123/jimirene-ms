@@ -50,7 +50,7 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
     living: "Living Children",
     LMP: "Last Menstrual Period",
     edc: "Estimated Due Date",
-    IT_date: "Initial Treatment Date",
+    TT_date: "Tetanus",
     menarche: "Age at First Menstruation",
     // Consultation keys
     consultation_date: "Consultation Date",

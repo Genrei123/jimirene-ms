@@ -29,6 +29,7 @@ const PatientProfileModal: React.FC<PatientProfileModalProps> = ({
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [qrCode, setQrCode] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [missingFields, setMissingFields] = useState<string[]>([]);
 
   /**
    * handleInputChange
@@ -38,8 +39,9 @@ const PatientProfileModal: React.FC<PatientProfileModalProps> = ({
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    const parsedValue = isNaN(Number(value)) ? value : Number(value);
-    console.log("Field:", name, "Value:", parsedValue);
+    const parsedValue = value === "" ? "" : isNaN(Number(value)) ? value : Number(value);
+
+
     if (name.includes(".")) {
       
       // Nested field (e.g., "spouse.spouseName")
@@ -73,16 +75,17 @@ const PatientProfileModal: React.FC<PatientProfileModalProps> = ({
     // If the user is on the first step (index 0), validate required fields
     if (currentStep === 0) {
       const requiredFields = ["patientID", "lastName", "givenName", "age", "sex"];
-      const missingFields = requiredFields.filter((field) => !formData[field]);
-
-      if (missingFields.length > 0) {
-
+      const missing = requiredFields.filter((field) => !formData[field]);
+  
+      if (missing.length > 0) {
+        setMissingFields(missing); // Update missing fields state
         setErrorMessage(
-          `Please fill in the required fields: ${missingFields.join(", ").toUpperCase()}`
+          `Please fill in the required fields: ${missing.join(", ").toUpperCase()}`
         );
         return false;
       }
     }
+    setMissingFields([]); // Clear missing fields if validation passes
     return true; // All other steps are optional
   };
 

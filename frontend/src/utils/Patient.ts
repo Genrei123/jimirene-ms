@@ -32,7 +32,7 @@ export const createEmptyPatient = (): Patient => ({
     living: 0,
     LMP: "",
     edc: "",
-    IT_date: "",
+    TT_date: "",
     menarche: "",
   },
   consultation: {

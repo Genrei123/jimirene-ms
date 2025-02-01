@@ -5,13 +5,13 @@ public class MedicalHistoryDTO {
     private Long patientId; // Referencing patient ID instead of the entire Patient object
     private boolean smoking;
     private String allergies;
-    private boolean drugIntake;
-    private boolean bleedingAnemia;
-    private boolean diabetesCongenitalAnomalies;
-    private boolean previousCSection;
-    private boolean consecutiveMiscarriages;
-    private boolean postPartumHemorrhage;
-    private boolean forcepDelivery;
+    private boolean drug_intake;
+    private boolean bleeding_anemia;
+    private boolean diabetes_congenital_anomalies;
+    private boolean previous_C_section;
+    private boolean consecutive_miscarriages;
+    private boolean post_partum_hemorrhage;
+    private boolean forcep_delivery;
     private boolean hypertension;
 
     // Getters and Setters
@@ -48,59 +48,59 @@ public class MedicalHistoryDTO {
     }
 
     public boolean isDrugIntake() {
-        return drugIntake;
+        return drug_intake;
     }
 
     public void setDrugIntake(boolean drugIntake) {
-        this.drugIntake = drugIntake;
+        this.drug_intake = drugIntake;
     }
 
     public boolean isBleedingAnemia() {
-        return bleedingAnemia;
+        return bleeding_anemia;
     }
 
     public void setBleedingAnemia(boolean bleedingAnemia) {
-        this.bleedingAnemia = bleedingAnemia;
+        this.bleeding_anemia = bleedingAnemia;
     }
 
     public boolean isDiabetesCongenitalAnomalies() {
-        return diabetesCongenitalAnomalies;
+        return diabetes_congenital_anomalies;
     }
 
     public void setDiabetesCongenitalAnomalies(boolean diabetesCongenitalAnomalies) {
-        this.diabetesCongenitalAnomalies = diabetesCongenitalAnomalies;
+        this.diabetes_congenital_anomalies = diabetesCongenitalAnomalies;
     }
 
     public boolean isPreviousCSection() {
-        return previousCSection;
+        return previous_C_section;
     }
 
     public void setPreviousCSection(boolean previousCSection) {
-        this.previousCSection = previousCSection;
+        this.previous_C_section = previousCSection;
     }
 
     public boolean isConsecutiveMiscarriages() {
-        return consecutiveMiscarriages;
+        return consecutive_miscarriages;
     }
 
     public void setConsecutiveMiscarriages(boolean consecutiveMiscarriages) {
-        this.consecutiveMiscarriages = consecutiveMiscarriages;
+        this.consecutive_miscarriages = consecutiveMiscarriages;
     }
 
     public boolean isPostPartumHemorrhage() {
-        return postPartumHemorrhage;
+        return post_partum_hemorrhage;
     }
 
     public void setPostPartumHemorrhage(boolean postPartumHemorrhage) {
-        this.postPartumHemorrhage = postPartumHemorrhage;
+        this.post_partum_hemorrhage = postPartumHemorrhage;
     }
 
     public boolean isForcepDelivery() {
-        return forcepDelivery;
+        return forcep_delivery;
     }
 
     public void setForcepDelivery(boolean forcepDelivery) {
-        this.forcepDelivery = forcepDelivery;
+        this.forcep_delivery = forcepDelivery;
     }
 
     public boolean isHypertension() {

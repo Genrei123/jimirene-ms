@@ -19,7 +19,6 @@ public class PatientService {
         return false;
     }
 
-
     public Patient findById(Long patientId) {
         return patientRepo.findById(patientId).orElse(null);
     }
@@ -41,7 +40,6 @@ public class PatientService {
         patient.setBranch(patientDTO.getBranch());
         patient.setContactNumber(patientDTO.getContactNumber());
 
-
         // Map Spouse if provided
         if (patientDTO.getSpouse() != null) {
             Spouse spouse = new Spouse();
@@ -51,7 +49,7 @@ public class PatientService {
             spouse.setSpouse_religion(spouseDTO.getSpouseReligion());
             spouse.setSpouse_occupation(spouseDTO.getSpouseOccupation());
             spouse.setSpouse_contact_number(spouseDTO.getSpouseContactNumber());
-            spouse.setSpouse_age(spouseDTO.getSpouseAge());
+            spouse.setSpouse_age(spouseDTO.getSpouseAge() != null ? spouseDTO.getSpouseAge() : 0); // Default to 0 if null
             spouse.setPatient(patient);
             patient.setSpouse(spouse);
         }

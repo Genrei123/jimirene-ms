@@ -2,11 +2,11 @@ import React from 'react'
 
 interface ConsultationDetails {
   consultation_date: string
-  AOG: number
-  BP: number
+  aog: number
+  bp: number
   weight: number
-  FH: number
-  FHT: number
+  fh: number
+  fht: number
   remarks: string
 }
 
@@ -28,11 +28,11 @@ const ConsultationDetailsSection: React.FC<ConsultationDetailsSectionProps> = ({
 }) => {
   const consultationFields = [
     { label: 'Consultation Date', name: 'consultation_date', type: 'date' },
-    { label: 'AOG', name: 'AOG', type: 'number' },
-    { label: 'BP', name: 'BP', type: 'text' },
+    { label: 'AOG', name: 'aog', type: 'number' },
+    { label: 'BP', name: 'bp', type: 'text' },
     { label: 'Weight', name: 'weight', type: 'number' },
-    { label: 'FH', name: 'FH', type: 'number' },
-    { label: 'FHT', name: 'FHT', type: 'number' },
+    { label: 'FH', name: 'fh', type: 'number' },
+    { label: 'FHT', name: 'fht', type: 'number' },
     { label: 'Remarks', name: 'remarks', type: 'textarea' },
   ] as const
 

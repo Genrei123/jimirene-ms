@@ -35,34 +35,25 @@ const PatientProfileModal: React.FC<PatientProfileModalProps> = ({
    * handleInputChange
    * A generic function to handle any input field changes.
    */
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    const parsedValue = value === "" ? "" : isNaN(Number(value)) ? value : Number(value);
-
-
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type } = e.target;
+  
+    // Handle nested fields (e.g., "spouse.spouse_name")
     if (name.includes(".")) {
-      
-      // Nested field (e.g., "spouse.spouseName")
       const [parent, child] = name.split(".");
-      console.log("Nested field:", name);
-      setFormData((prev) => {
-        const parentObj = prev[parent as keyof Patient];
-        const existingNested =
-          parentObj && typeof parentObj === "object" ? { ...parentObj } : {};
-
-        return {
-          ...prev,
-          [parent]: {
-            ...existingNested,
-            [child]: parsedValue,
-          },
-        };
-      });
+      setFormData((prev) => ({
+        ...prev,
+        [parent]: {
+          ...prev[parent],
+          [child]: type === "number" ? Number(value) : value,
+        },
+      }));
     } else {
-      // Top-level field
-      setFormData((prev) => ({ ...prev, [name]: parsedValue}));
+      // Handle top-level fields
+      setFormData((prev) => ({
+        ...prev,
+        [name]: type === "number" ? Number(value) : value,
+      }));
     }
   };
 

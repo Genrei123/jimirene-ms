@@ -14,12 +14,12 @@ export default interface Patient {
   contactNumber: string;
   status: string;
   spouse: {
-    spouseName: string;
-    spouseBirthday: string;
-    spouseReligion: string;
-    spouseOccupation: string;
-    spouseContactNumber: string;
-    spouseAge: number;
+    spouse_name: string,
+    spouse_birthday: string,
+    spouse_religion: string,
+    spouse_occupation: string,
+    spouse_contact_number: string,
+    spouse_age: number,
   };
 
   pregnancy: {
@@ -31,30 +31,31 @@ export default interface Patient {
     living: number;
     LMP: string;
     edc: string;
-    TT_date: string;
+    tt_date: string;
     menarche: string;
   };
 
   consultation: {
     consultation_date: string; // Corrected from `consultation_date`
-    AOG: number;
-    BP: number;
+    aog: number;
+    bp: number;
     weight: number;
-    FH: number;
-    FHT: number;
+    fh: number;
+    fht: number;
     remarks: string;
   };
 
   medicalHistory: {
+    
     smoking: boolean;
     allergies: string;
-    drugIntake: boolean;
-    bleedingAnemia: boolean;
-    diabetesCongenitalAnomalies: boolean;
-    previousCSection: boolean;
-    consecutiveMiscarriages: boolean; // Corrected from `consectuivemiscarriage`
-    postPartumHemorrhage: boolean;
-    forcepDelivery: boolean;
+    drug_intake: boolean;
+    bleeding_anemia: boolean;
+    diabetes_congenital_anomalies: boolean;
+    previous_C_section: boolean;
+    consecutive_miscarriages: boolean; // Corrected from `consectuivemiscarriage`
+    post_partum_hemorrhage: boolean;
+    forcep_delivery: boolean;
     hypertension: boolean;
   };
 

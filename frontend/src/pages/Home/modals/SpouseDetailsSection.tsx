@@ -1,12 +1,12 @@
 import React from "react";
 
 interface SpouseDetails {
-  spouseName: string;
-  spouseBirthday: string;
-  spouseReligion: string;
-  spouseOccupation: string;
-  spouseContactNumber: string;
-  spouseAge: number;
+  spouse_name: string;
+  spouse_birthday: string;
+  spouse_religion: string;
+  spouse_occupation: string;
+  spouse_contact_number: string;
+  spouse_age: number;
 }
 
 interface SpouseFormData {
@@ -36,14 +36,14 @@ const SpouseDetailsSection: React.FC<SpouseDetailsSectionProps> = ({
   };
 
   const spouseFields = [
-    { label: "Spouse Name", name: "spouseName", type: "text" },
-    { label: "Spouse Birthday", name: "spouseBirthday", type: "date" },
-    { label: "Spouse Age", name: "spouseAge", type: "number" },
-    { label: "Spouse Religion", name: "spouseReligion", type: "text" },
-    { label: "Spouse Occupation", name: "spouseOccupation", type: "text" },
+    { label: "Spouse Name", name: "spouse_name", type: "text" },
+    { label: "Spouse Birthday", name: "spouse_birthday", type: "date" },
+    { label: "Spouse Age", name: "spouse_age", type: "number" },
+    { label: "Spouse Religion", name: "spouse_religion", type: "text" },
+    { label: "Spouse Occupation", name: "spouse_occupation", type: "text" },
     {
       label: "Spouse Contact Number",
-      name: "spouseContactNumber",
+      name: "spouse_contact_number",
       type: "tel",
     },
     
@@ -66,7 +66,7 @@ const SpouseDetailsSection: React.FC<SpouseDetailsSectionProps> = ({
               type={type}
               value={formData.spouse[name] || ""}
               onChange={
-                name === "spouseBirthday"
+                name === "spouse_birthday"
                   ? (e) => {
                       handleInputChange(e);
                       const age = calculateAge(e.target.value);

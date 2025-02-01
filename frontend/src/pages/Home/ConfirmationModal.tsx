@@ -35,12 +35,12 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
     medicalHistory: "Medical History",
     contactNumber: "Contact Number",
     // Nested spouse keys
-    spouseName: "Spouse Name",
-    spouseBirthday: "Spouse's Date of Birth",
-    spouseReligion: "Spouse's Religion",
-    spouseOccupation: "Spouse's Occupation",
-    spouseContactNumber: "Spouse's Contact Number",
-    spouseAge: "Spouse's Age",
+    spouse_name: "Spouse Name",
+    spouse_birthday: "Spouse's Date of Birth",
+    spouse_religion: "Spouse's Religion",
+    spouse_occupation: "Spouse's Occupation",
+    spouse_contact_number: "Spouse's Contact Number",
+    spouse_age: "Spouse's Age",
     // Pregnancy keys
     gravida: "Number of Pregnancies",
     para: "Number of Births",
@@ -54,29 +54,24 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
     menarche: "Age at First Menstruation",
     // Consultation keys
     consultation_date: "Consultation Date",
-    AOG: "Age of Gestation (weeks)",
-    BP: "Blood Pressure",
+    aog: "Age of Gestation (weeks)",
+    bp: "Blood Pressure",
     weight: "Weight",
-    FH: "Fundal Height",
-    FHT: "Fetal Heart Tone",
+    fh: "Fundal Height",
+    fht: "Fetal Heart Tone",
     remarks: "Remarks",
     // Medical history keys
     smoking: "Smoker",
     allergies: "Allergies",
-    drugIntake: "Taking Medications",
-    bleedingAnemia: "History of Bleeding/Anemia",
-    diabetesCongenitalAnomalies: "Diabetes or Congenital Anomalies",
-    previousCSection: "Previous C-Section",
-    consecutiveMiscarriages: "Consecutive Miscarriages",
-    postPartumHemorrhage: "Postpartum Hemorrhage",
-    forcepDelivery: "Forceps Delivery",
+    drug_intake: "Taking Medications",
+    bleeding_anemia: "History of Bleeding/Anemia",
+    diabetes_congenital_anomalies: "Diabetes or Congenital Anomalies",
+    previous_C_ection: "Previous C-Section",
+    consecutive_miscarriages: "Consecutive Miscarriages",
+    post_partum_hemorrhage: "Postpartum Hemorrhage",
+    forcep_delivery: "Forceps Delivery",
     hypertension: "Hypertension",
   };
-
-  useEffect(() => {
-    const response = axiosInstance.get(`/generateqr?clientID=/${data.clientID}`);
-    console.log(response);
-  });
 
   const renderValue = (value: any): React.ReactNode => {
     if (typeof value === "object" && value !== null) {

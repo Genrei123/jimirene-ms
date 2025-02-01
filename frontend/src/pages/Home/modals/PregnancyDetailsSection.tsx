@@ -9,7 +9,7 @@ interface PregnancyDetails {
   living: number
   LMP: string
   edc: string
-  TT_date: string
+  tt_date: string
   menarche: string
 }
 
@@ -39,9 +39,9 @@ const PregnancyDetailsSection: React.FC<PregnancyDetailsSectionProps> = ({
   ] as const
 
   const dateFields = [
-    { label: 'LMP', name: 'LMP' },
-    { label: 'EDC', name: 'EDC' },
-    { label: 'IT Date', name: 'TT_date' },
+    { label: 'LMP', name: 'lmp' },
+    { label: 'EDC', name: 'edc' },
+    { label: 'IT Date', name: 'tt_date' },
     { label: 'Menarche', name: 'menarche' },
   ] as const
 

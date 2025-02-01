@@ -3,6 +3,8 @@ package com.jwt.spring_security.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 @Entity
 public class Spouse {
 
@@ -16,11 +18,11 @@ public class Spouse {
     private Patient patient;
 
     private String spouse_name;
-    private String spouse_birthday;
+    private Date spouse_birthday;
     private String spouse_religion;
     private String spouse_occupation;
     private String spouse_contact_number;
-    private int spouse_age;
+    private Integer spouse_age;
 
     @Column(nullable = false)
     private boolean deleted = false;
@@ -56,12 +58,12 @@ public class Spouse {
     }
 
     // Getter for spouse_birthday
-    public String getSpouse_birthday() {
+    public Date getSpouse_birthday() {
         return spouse_birthday;
     }
 
     // Setter for spouse_birthday
-    public void setSpouse_birthday(String spouse_birthday) {
+    public void setSpouse_birthday(Date spouse_birthday) {
         this.spouse_birthday = spouse_birthday;
     }
 

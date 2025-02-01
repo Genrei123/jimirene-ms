@@ -8,7 +8,7 @@ import java.util.Date;
 public class ConsultationDTO {
     @JsonProperty("consultationDate")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private Date consultationDate;
+    private Date consultation_date;
     @JsonProperty("AOG")
     private Integer AOG; // Nullable
     @JsonProperty("BP")
@@ -21,11 +21,11 @@ public class ConsultationDTO {
     private String remarks; // Nullable
 
     public Date getConsultationDate() {
-        return consultationDate;
+        return consultation_date;
     }
 
     public void setConsultationDate(Date consultationDate) {
-        this.consultationDate = consultationDate;
+        this.consultation_date = consultationDate;
     }
 
     public Integer getAOG() {

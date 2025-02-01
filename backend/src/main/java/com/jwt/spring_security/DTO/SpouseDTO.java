@@ -1,12 +1,32 @@
 package com.jwt.spring_security.DTO;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.Date;
+
 public class SpouseDTO {
+    @JsonProperty("spouse_id")  // Add this to match GET response
+    private Long spouseId;
+
+    @JsonProperty("spouse_name")
     private String spouseName;
-    private String spouseBirthday; // Nullable
-    private String spouseReligion; // Nullable
-    private String spouseOccupation; // Nullable
-    private String spouseContactNumber; // Nullable
-    private Integer spouseAge; // Nullable
+
+    @JsonProperty("spouse_birthday")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date spouseBirthday;
+
+    @JsonProperty("spouse_religion")
+    private String spouseReligion;
+
+    @JsonProperty("spouse_occupation")
+    private String spouseOccupation;
+
+    @JsonProperty("spouse_contact_number")
+    private String spouseContactNumber;
+
+    @JsonProperty("spouse_age")
+    private Integer spouseAge;
 
     public String getSpouseName() {
         return spouseName;
@@ -16,11 +36,11 @@ public class SpouseDTO {
         this.spouseName = spouseName;
     }
 
-    public String getSpouseBirthday() {
+    public Date getSpouseBirthday() {
         return spouseBirthday;
     }
 
-    public void setSpouseBirthday(String spouseBirthday) {
+    public void setSpouseBirthday(Date spouseBirthday) {
         this.spouseBirthday = spouseBirthday;
     }
 

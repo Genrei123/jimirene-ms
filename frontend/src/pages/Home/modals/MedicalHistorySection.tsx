@@ -1,28 +1,26 @@
-import React from 'react'
+import React from 'react';
 
 interface MedicalHistory {
-  smoking: boolean
-  drugIntake: boolean
-  bleedingAnemia: boolean
-  previousCSection: boolean
-  consecutiveMiscarriages: boolean
-  diabetesCongenitalAnomalies: boolean
-  postPartumHemorrhage: boolean
-  forcepDelivery: boolean
-  hypertension: boolean
-  allergies: string
+  smoking: boolean;
+  drug_intake: boolean;
+  bleeding_anemia: boolean;
+  previous_C_section: boolean;
+  consecutive_miscarriages: boolean; // Updated to match backend JSON
+  diabetes_congenital_anomalies: boolean;
+  post_partum_hemorrhage: boolean;
+  forcep_delivery: boolean;
+  hypertension: boolean;
+  allergies: string;
 }
 
 interface MedicalHistoryFormData {
-  medicalHistory: MedicalHistory
+  medicalHistory: MedicalHistory;
 }
 
 interface MedicalHistorySectionProps {
-  formData: MedicalHistoryFormData
-  setFormData: React.Dispatch<React.SetStateAction<MedicalHistoryFormData>>
-  handleInputChange: (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => void
+  formData: MedicalHistoryFormData;
+  setFormData: React.Dispatch<React.SetStateAction<MedicalHistoryFormData>>;
+  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const MedicalHistorySection: React.FC<MedicalHistorySectionProps> = ({
@@ -32,26 +30,26 @@ const MedicalHistorySection: React.FC<MedicalHistorySectionProps> = ({
 }) => {
   const medicalHistoryFields = [
     { label: 'Smoking', name: 'smoking' },
-    { label: 'Drug Intake', name: 'drugIntake' },
-    { label: 'Bleeding Anemia', name: 'bleedingAnemia' },
-    { label: 'Previous C Section', name: 'previousCSection' },
-    { label: 'Consecutive Miscarriages', name: 'consecutiveMiscarriages' },
-    { label: 'Diabetes Congenital Anomalies', name: 'diabetesCongenitalAnomalies' },
-    { label: 'Post Partum Hemorrhage', name: 'postPartumHemorrhage' },
-    { label: 'Forcep Delivery', name: 'forcepDelivery' },
+    { label: 'Drug Intake', name: 'drug_intake' },
+    { label: 'Bleeding Anemia', name: 'bleeding_anemia' },
+    { label: 'Previous C Section', name: 'previous_C_section' },
+    { label: 'Consecutive Miscarriages', name: 'consecutive_miscarriages' }, // Updated to match backend JSON
+    { label: 'Diabetes Congenital Anomalies', name: 'diabetes_congenital_anomalies' },
+    { label: 'Post Partum Hemorrhage', name: 'post_partum_hemorrhage' },
+    { label: 'Forcep Delivery', name: 'forcep_delivery' },
     { label: 'Hypertension', name: 'hypertension' },
-  ] as const
+  ] as const;
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = e.target
+    const { name, checked } = e.target;
     setFormData((prev) => ({
       ...prev,
       medicalHistory: {
         ...prev.medicalHistory,
         [name]: checked,
       },
-    }))
-  }
+    }));
+  };
 
   return (
     <div className="space-y-6">
@@ -88,7 +86,7 @@ const MedicalHistorySection: React.FC<MedicalHistorySectionProps> = ({
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default MedicalHistorySection
+export default MedicalHistorySection;

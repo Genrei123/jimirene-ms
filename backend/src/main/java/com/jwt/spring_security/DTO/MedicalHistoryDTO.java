@@ -1,17 +1,31 @@
 package com.jwt.spring_security.DTO;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class MedicalHistoryDTO {
+    @JsonProperty("medical_history_id")
     private Long medicalHistoryId;
+    @JsonProperty("patient_id")
     private Long patientId; // Referencing patient ID instead of the entire Patient object
+    @JsonProperty("smoking")
     private boolean smoking;
+    @JsonProperty("allergies")
     private String allergies;
+    @JsonProperty("drug_intake")
     private boolean drug_intake;
+    @JsonProperty("bleeding_anemia")
     private boolean bleeding_anemia;
+    @JsonProperty("diabetes_congenital_anomalies")
     private boolean diabetes_congenital_anomalies;
+    @JsonProperty("previous_C_section")
     private boolean previous_C_section;
+    @JsonProperty("consecutive_miscarriages")
     private boolean consecutive_miscarriages;
+    @JsonProperty("post_partum_hemorrhage")
     private boolean post_partum_hemorrhage;
+    @JsonProperty("forcep_delivery")
     private boolean forcep_delivery;
+    @JsonProperty("hypertension")
     private boolean hypertension;
 
     // Getters and Setters

@@ -379,6 +379,9 @@ const Patient: React.FC = () => {
                     <thead>
                       <tr className="bg-gray-50">
                         <th className="border border-gray-200 p-2 text-left">
+                          Date
+                        </th>
+                        <th className="border border-gray-200 p-2 text-left">
                           Services
                         </th>
                         <th className="border border-gray-200 p-2 text-left">
@@ -399,9 +402,13 @@ const Patient: React.FC = () => {
                           (rs: any, index: number) => (
                             <tr key={index} className="hover:bg-gray-50">
                               <td className="border border-gray-200 p-2">
+                                {rs.serviceDate}
+                              </td>
+                              <td className="border border-gray-200 p-2">
                                 <ul className="list-disc ml-5">
                                   {rs.services.map((s: any, sIndex: number) => (
                                     <li key={sIndex}>
+                                      {s.serviceDate}
                                       {s.serviceName} - PHP
                                       {s.servicePrice.toFixed(2)}
                                     </li>
@@ -428,6 +435,7 @@ const Patient: React.FC = () => {
                                 PHP{rs.totalCost.toFixed(2)}
                               </td>
                               <td className="border border-gray-200 p-2">
+                                {rs.serviceDate}
                                 {rs.notes}
                               </td>
                             </tr>

@@ -141,6 +141,7 @@ public class ServiceController {
             renderedService.setItems(items);
             renderedService.setTotalCost(request.getTotalCost());
             renderedService.setNotes(request.getNotes());
+            renderedService.setServiceDate(request.getServiceDate());
 
             RenderedService savedService = renderedServiceRepository.save(renderedService);
 
@@ -169,6 +170,9 @@ public class ServiceController {
             dto.setPatientId(rs.getPatient().getClientID()); // only store patient's ID
             dto.setTotalCost(rs.getTotalCost());
             dto.setNotes(rs.getNotes());
+            dto.setServiceDate(rs.getServiceDate());
+
+
 
             // Map services
             List<ServiceDTO> serviceDTOs = new ArrayList<>();

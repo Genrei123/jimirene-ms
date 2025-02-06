@@ -1,6 +1,8 @@
 package com.jwt.spring_security.model;
 
 import jakarta.persistence.*;
+
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -9,6 +11,9 @@ public class RenderedService {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    // Auto select the current date
+    private Date serviceDate = new Date();
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false) // Association with Patient
     @JoinColumn(name = "patient_id", nullable = false)
@@ -34,7 +39,26 @@ public class RenderedService {
 
     private String notes;
 
+    @Column(nullable = false)
+    private String status = "active";
+
     // Getters and Setters
+    public Date getServiceDate() {
+        return serviceDate;
+    }
+
+    public void setServiceDate(Date serviceDate) {
+        this.serviceDate = serviceDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public Long getId() {
         return id;
     }

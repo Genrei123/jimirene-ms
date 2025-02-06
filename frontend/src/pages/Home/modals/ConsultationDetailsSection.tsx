@@ -30,9 +30,9 @@ const ConsultationDetailsSection: React.FC<ConsultationDetailsSectionProps> = ({
     { label: 'Consultation Date', name: 'consultation_date', type: 'date' },
     { label: 'AOG', name: 'aog', type: 'number' },
     { label: 'BP', name: 'bp', type: 'text' },
-    { label: 'Weight', name: 'weight', type: 'number' },
+    { label: 'Weight (in kg)', name: 'weight', type: 'number' },
     { label: 'FH', name: 'fh', type: 'number' },
-    { label: 'FHT', name: 'fht', type: 'number' },
+    { label: 'FHT (in cm)', name: 'fht', type: 'number' },
     { label: 'Remarks', name: 'remarks', type: 'textarea' },
   ] as const
 

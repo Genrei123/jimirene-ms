@@ -1,5 +1,6 @@
 package com.jwt.spring_security.DTO;
 
+import java.util.Date;
 import java.util.List;
 
 public class RenderedServiceDTO {
@@ -9,8 +10,18 @@ public class RenderedServiceDTO {
     private List<ItemDTO> items;       // A list of simpler DTOs for items
     private Double totalCost;
     private String notes;
+    private Date serviceDate;          // This field is missing in the DTO
 
     // Getters and Setters
+
+    public Date getServiceDate() {
+        return serviceDate;
+    }
+
+    public void setServiceDate(Date serviceDate) {
+        this.serviceDate = serviceDate;
+    }
+
     public Long getId() {
         return id;
     }
